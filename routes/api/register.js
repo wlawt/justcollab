@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const fs = require('fs');
-
+const fs = require("fs");
 
 /* 
     @route      POST api/register/
@@ -21,20 +20,31 @@ router.post("/", (req, res) => {
 
   const { exec } = require("child_process");
   //var counter = 0;
-  exec('cd justcollab-site && touch 2abc.html', function(error, stdout, stderr) {
+  exec("cd justcollab-site && touch 2abc.html", function(
+    error,
+    stdout,
+    stderr
+  ) {
     if (error) {
       console.log(error.message);
     } else {
-      fs.writeFile("justcollab-site/2abc.html", req.body.message, 'utf8', function (err) {
-        if (err) {
+      fs.writeFile(
+        "justcollab-site/2abc.html",
+        req.body.message,
+        "utf8",
+        function(err) {
+          if (err) {
             console.log("An error occured while writing JSON Object to File.");
             return console.log(err);
+          } else {
+            exec(
+              "git add . && git commit -m 'init' && git push -u origin master"
+            );
+          }
         }
-     
-      });
+      );
     }
   });
-    //
 
   /* const ss = spawn(
     `git add . && git commit -m 'init${
@@ -42,8 +52,6 @@ router.post("/", (req, res) => {
     }' && git push -u origin master`,
     { detached: true }
   ); */
-
-  
 
   /* ss.stdout.on("data", data => {
     console.log(data);
