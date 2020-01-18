@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const fs = require('fs');
+
+
 /* 
     @route      POST api/register/
     @desc       Hosting the website from the link
@@ -18,11 +21,18 @@ router.post("/", (req, res) => {
 
   const { exec } = require("child_process");
   //var counter = 0;
-  exec('cd justcollab-site && touch 2abc.html && echo'.concat(String(req.body.message)).concat(' | tee 2abc.html'), function(error, stdout, stderr) {
+  exec('cd justcollab-site && touch 2abc.html', function(error, stdout, stderr) {
     if (error) {
       console.log(error.message);
     } else {
-      console.log(stdout);
+      fs.writeFile("justcollab-site/2abc.html", req.body.message, 'utf8', function (err) {
+        if (err) {
+            console.log("An error occured while writing JSON Object to File.");
+            return console.log(err);
+        }
+     
+        console.log("JSON file has been saved.");
+      });
     }
   });
     //
