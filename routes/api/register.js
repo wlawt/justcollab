@@ -16,15 +16,16 @@ router.post("/", (req, res) => {
   //return req.body["message"];
   //return res.json(req.body);
 
-  const { spawn } = require("child_process");
+  const { exec } = require("child_process");
   //var counter = 0;
-  spawn(
-    //cd ../../justcollab-site && touch 2abc.html && echo "${req.body.message}" >> 2abc.html
-    `touch 2abc.html`,
-    {
-      detached: true
+  exec('cd justcollab-site && touch 2abc.html && echo'.concat(String(req.body.message)).concat(' | tee 2abc.html'), function(error, stdout, stderr) {
+    if (error) {
+      console.log(error.message);
+    } else {
+      console.log(stdout);
     }
-  );
+  });
+    //
 
   /* const ss = spawn(
     `git add . && git commit -m 'init${
@@ -33,13 +34,7 @@ router.post("/", (req, res) => {
     { detached: true }
   ); */
 
-  myShellScript.stdout.on("data", data => {
-    console.log(data);
-    // do whatever you want here with data
-  });
-  myShellScript.stderr.on("data", data => {
-    console.error(data);
-  });
+  
 
   /* ss.stdout.on("data", data => {
     console.log(data);
