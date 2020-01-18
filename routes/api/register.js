@@ -8,9 +8,15 @@ const router = express.Router();
 */
 
 router.post("/", (req, res) => {
-  const body = req.body.jsonfile;
+  //const bodys = req;
 
-  console.log(body);
+  //console.log(req.body);
+
+  console.log(req.body.message);
+  //return req.body["message"];
+  //return res.json(req.body);
+
+  return res.json("{'url': 'justcollab'}");
 });
 
 module.exports = router;
