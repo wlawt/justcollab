@@ -16,6 +16,17 @@ router.post("/", (req, res) => {
   //return req.body["message"];
   //return res.json(req.body);
 
+  const exec = require('child_process').exec, child;
+  var counter = 0;
+  const myShellScript = exec(`git add . && git commit -m 'init${counter == 0 ? counter++ : counter++}'`);
+  myShellScript.stdout.on('data', (data)=>{
+      console.log(data); 
+      // do whatever you want here with data
+  });
+  myShellScript.stderr.on('data', (data)=>{
+      console.error(data);
+  });
+
   return res.json("{'url': 'justcollab'}");
 });
 
