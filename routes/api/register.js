@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
             return console.log(err);
           } else {
             exec(
-              "git add . && git commit -m 'init' && git push -u origin master"
+              "cd justcollab-site && git add . && git commit -m 'init' && git push -u origin master"
             );
           }
         }
