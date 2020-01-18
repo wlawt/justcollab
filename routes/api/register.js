@@ -31,7 +31,6 @@ router.post("/", (req, res) => {
             return console.log(err);
         }
      
-        console.log("JSON file has been saved.");
       });
     }
   });
