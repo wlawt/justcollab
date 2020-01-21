@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
 
   const { exec } = require("child_process");
   //var counter = 0;
-  exec("cd justcollab-site && touch 2abc.html", function(
+  exec("cd justcollab-site && touch 4abc.html", function(
     error,
     stdout,
     stderr
@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
       console.log(error.message);
     } else {
       fs.writeFile(
-        "justcollab-site/2abc.html",
+        "justcollab-site/4abc.html",
         req.body.message,
         "utf8",
         function(err) {
@@ -38,8 +38,11 @@ router.post("/", (req, res) => {
             return console.log(err);
           } else {
             exec(
-              "cd justcollab-site && git add . && git commit -m 'init' && git push -u origin master"
-            );
+              "cd justcollab-site && git add . && git commit -m 'init' && git push -u origin master", function(error, stdout, stderr) {
+                if(error) {
+                  console.log(error.message);
+                }
+            });
           }
         }
       );
